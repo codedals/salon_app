@@ -1,0 +1,1 @@
+json.partial! "salon_images/salon_image", salon_image: @salon_image

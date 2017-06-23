@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @salon_image.name %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= image_tag @salon_image.image_url, class: "img-thumbnail", size:"500" %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @salon_image.type %>
+</p>
+
+<%= link_to 'Edit', edit_salon_salon_image_path(@salon, @salon_image) %> |
+<%= link_to 'All Images', salon_salon_images_path(@salon) %>

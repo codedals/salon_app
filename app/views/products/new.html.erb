@@ -1,0 +1,6 @@
+<h1>Add Product for: <%= @salon.name %></h1>
+
+<%= render 'form', product: @product %>
+
+<%= link_to 'Salon Edit', edit_salon_path(@salon.id) %> |
+<%= link_to 'All Products', salon_products_path(@salon.id) %>

@@ -1,0 +1,10 @@
+<!-- <h2 class="sub-header">Section title</h2> -->
+<div class="table-responsive">
+  <p id="notice"><%= notice %></p>
+  
+  <h1>Salons</h1>
+  <% @salons.each do |salon| %>
+  <%= render "salons/salon_list_card", :salon => salon %>
+  <% end %>
+  <br>
+</div>

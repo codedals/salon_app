@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @product.type %>
+</p>
+
+<p>
+  <strong>Salon:</strong>
+  <%= @product.salon_id %>
+</p>
+
+<%= link_to 'Edit', edit_salon_product_path(@salon,@product) %> |
+<%= link_to 'All Products', salon_products_path(@salon.id) %>

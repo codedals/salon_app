@@ -1,0 +1,34 @@
+<h2 class="sub-header">Image Management (<%= @salon.name %>)</h2>
+<div class="table-responsive">
+<p id="notice"><%= notice %></p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @salon_images.each do |salon_image| %>
+      <tr>
+        <td><%= salon_image.name %></td>
+        <td><%= image_tag salon_image.image_url, class: "img-thumbnail" %></td>
+        <td><%= salon_image.type %></td>
+        <td><%= link_to 'Show', salon_salon_image_url(@salon, salon_image) %></td>
+        <td><%= link_to 'Edit', edit_salon_salon_image_path(@salon, salon_image) %></td>
+        <td><%= link_to 'Destroy', salon_salon_image_path(@salon, salon_image), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Salon Image', new_salon_salon_image_path(@salon) %>
+<br />
+<%= link_to "Back to Salon", salon_path(@salon) %>
+</div>

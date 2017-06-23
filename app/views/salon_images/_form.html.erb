@@ -1,0 +1,33 @@
+<%= form_for([@salon, salon_image], html:{multipart:true}) do |f| %>
+  <% if salon_image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(salon_image.errors.count, "error") %> prohibited this salon_image from being saved:</h2>
+
+      <ul>
+      <% salon_image.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class:"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :image %>
+    <%= f.file_field :image_file, class:"form-control-file" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :type %>
+    <%= f.number_field :type, class:"form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
+<br/>

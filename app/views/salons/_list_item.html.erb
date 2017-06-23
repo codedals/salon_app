@@ -1,0 +1,11 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><%= col_name %></div>
+  <ul class="list-group">
+    <% col.each do |item| %>
+    <li class="list-group-item"><%= item.titleize %></li>
+    <% end %>
+  </ul>
+</div>
+
+

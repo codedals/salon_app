@@ -1,0 +1,8 @@
+<div class="card mb-3">
+  <%= image_tag "/sample_salon_images/salon_#{(1..5).to_a.sample}.jpg", class: "card-img-top" %>
+  <div class="card-block">
+    <h4 class="card-title"><%= salon.name %></h4>
+    <p class="card-text"><%= salon.description %></p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  </div>
+</div>

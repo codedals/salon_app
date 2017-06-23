@@ -1,0 +1,89 @@
+
+<p id="notice"><%= notice %></p>
+
+<div class="row form-group">
+  <div class="col-xs-12 col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-image">
+        <%= image_tag @salon.display_image, class: "panel-image-preview" %>
+      </div>
+      <div class="panel-body">
+        <h4><%= @salon.name %></h4>
+        <p><%= @salon.description %></p>
+      </div>
+      <% if false %>
+      <div class="panel-footer text-center">
+        <a href="#facebook"><span class="fa fa-facebook"></span></a>
+        <a href="#twitter"><span class="fa fa-twitter"></span></a>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+    <% if @salon.salon_images.count > 0 %>
+    <div class="page-header">Portfolio Images -- <%= link_to "View All (#{@salon.salon_images.count})", salon_salon_images_path(@salon.id) %></div>
+
+    <div class="row">
+      <% @salon.salon_images.limit(SalonImage::PREVIEW_LIST_LIMIT).each do |image| %>
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <%= image_tag image.image_url, class: "img-responsive" %>
+      </div>
+      <% end %>
+    </div>
+    <hr />
+    <% end %>
+    
+    <% if @salon.products.count > 0 %>
+    <div class="page-header">Menu Items -- <%= link_to "View All (#{@salon.products.count})", salon_products_path(@salon.id) %> </div>
+    <li class="list-group-item justify-content-between">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <% @salon.products.limit(Product::PREVIEW_LIST_LIMIT).each do |product| %>
+        
+        <tbody>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.price %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </li>
+    <% end %>
+  </div>
+  
+</div>
+
+<div>
+  <%= render partial: "list_item", locals: {col_name: "Categories", col: @salon.categories} if @salon.categories %>
+  
+  <%= render partial: "list_item", locals: {col_name: "Amenities", col: @salon.amenities} if @salon.amenities %>
+  
+  <%= render partial: "list_item", locals: {col_name: "Key Products", col: @salon.key_product_list}  if @salon.key_product_list %>
+  
+  <%= render partial: "list_item", locals: {col_name: "Ambience", col: @salon.ambience} if @salon.ambience %>
+  
+  <%= render partial: "list_item", locals: {col_name: "Specialities", col: @salon.specialities} if @salon.specialities %>
+  
+  <%= render partial: "list_item", locals: {col_name: "Payment Options", col: @salon.payment_options} if @salon.payment_options %>
+  
+  
+  <p>
+    <strong>Active:</strong>
+    <%= @salon.active %>
+  </p>
+  
+  <p>
+    <strong>Listed:</strong>
+    <%= @salon.listed %>
+  </p>
+  
+  <%= link_to 'Edit', edit_salon_path(@salon) %> |
+  <%= link_to 'Back', salons_path %>
+</div>

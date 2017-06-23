@@ -1,0 +1,173 @@
+<%= form_for(salon, html:{class:"form", multipart:true}) do |f| %>
+  <% if salon.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(salon.errors.count, "error") %> prohibited this salon from being saved:</h2>
+    <ul>
+      <% salon.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class:"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :main_image %>
+    <%= f.file_field :main_image, class:"form-control-file" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class:"form-control", rows:"3" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :location %>
+    <%= f.text_field :location, class:"form-control" %>
+  </div>
+
+  <hr />
+
+  <%= f.label :categories %>
+  <div class="form-check form-check-inline">
+  <% Salon::CATEGORIES.each do |k| %>
+    <label class="form-check-label">
+      <%= f.check_box :categories, {multiple:true}, k, nil %>
+      <%= k.titleize %>
+    </label>
+    <br/>
+    <% end %>
+  </div>
+
+  <hr/ >
+
+  <%= f.label :amenities %>
+  <div class="form-check form-check-inline">
+  <% Salon::AMENITIES.each do |k| %>
+    <label class="form-check-label">
+      <%= f.check_box :amenities, {multiple:true}, k, nil %>
+      <%= k.titleize %>
+    </label>
+    <br/>
+    <% end %>
+  </div>
+
+  <hr/ >
+
+  <%= f.label :key_products %>
+  <div class="form-check form-check-inline">
+  <% Salon::KEY_PRODUCTS.each do |k| %>
+    <label class="form-check-label">
+      <%= f.check_box :key_product_list, {multiple:true}, k, nil %>
+      <%= k.titleize %>
+    </label>
+    <br/>
+    <% end %>
+  </div>
+
+  <hr/ >
+
+  <%= f.label :ambience %>
+  <div class="form-check form-check-inline">
+  <% Salon::AMBIENCE.each do |k| %>
+    <label class="form-check-label">
+      <%= f.check_box :ambience, {multiple:true}, k, nil %>
+      <%= k.titleize %>
+    </label>
+    <br/>
+    <% end %>
+  </div>
+  <hr/ >
+
+  <%= f.label :specialities %>
+  <div class="form-check form-check-inline">
+  <% Salon::SPECIALITIES.each do |k| %>
+    <label class="form-check-label">
+      <%= f.check_box :specialities, {multiple:true}, k, nil %>
+      <%= k.titleize %>
+    </label>
+    <br/>
+    <% end %>
+  </div>
+  <hr/ >
+
+  <%= f.label :payment_options %>
+  <div class="form-check form-check-inline">
+  <% Salon::PAYMENT_OPTIONS.each do |k| %>
+    <label class="form-check-label">
+      <%= f.check_box :payment_options, {multiple:true}, k, nil %>
+      <%= k.titleize %>
+    </label>
+    <% end %>
+  </div>
+  <hr/ >
+
+    <% unless @salon.new_record? %>
+    <ul class="list-group">
+      <li class="list-group-item justify-content-between">
+        <%= link_to "Add", new_salon_product_path(@salon.id), :class => "btn btn-primary" %> |
+        <%= link_to "View All Menu Items (#{@salon.products.count})", salon_products_path(@salon.id) %>
+      </li>
+      <% if @salon.products.count > 0 %>
+      <li class="list-group-item justify-content-between">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <% @salon.products.limit(Product::PREVIEW_LIST_LIMIT).each do |product| %>
+
+          <tbody>
+            <tr>
+              <td><%= product.name %></td>
+              <td><%= product.price %></td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+      </li>
+        <% end %>
+
+      </li>
+      <li class="list-group-item justify-content-between">
+        <%= link_to "Add", new_salon_salon_image_path(@salon.id), :class => "btn btn-primary" %> |
+        <%= link_to "View All Portfolio Images (#{@salon.salon_images.count})", salon_salon_images_path(@salon.id) %>
+      </li>
+      <li class="list-group-item justify-content-between">
+        <div class="row">
+          <% @salon.salon_images.limit(SalonImage::PREVIEW_LIST_LIMIT).each do |image| %>
+          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <%= image_tag image.image_url, class: "img-responsive" %>
+          </div>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+    <% end %>
+    <hr />
+
+  <div class="form-check">
+    <label class="form-check-label">
+      <%= f.check_box :active, class:"form-check-input" %>
+      Active
+    </label>
+  </div>
+
+  <div class="form-check">
+    <label class="form-check-label">
+      <%= f.check_box :listed, class:"form-check-input" %>
+      Listed
+    </label>
+  </div>
+  <hr />
+  <div class="actions">
+    <%= f.submit class:"btn btn-primary" %>
+  </div>
+  <br>
+<% end %>
